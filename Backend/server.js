@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectToMongodb = require('./db/connectToMongodb');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 
 
 const authRoutes = require('./routes/authroutes');
@@ -18,6 +20,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
 app.use(cookieParser()); // to parse the incoming requests with cookies (from req.cookies)
+
+// Enable CORS for frontend (http://localhost:3000)
+// app.use(cors({ origin: 'http://localhost:3000' }));
 
 
 

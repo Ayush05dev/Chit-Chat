@@ -29,9 +29,11 @@ const sendMessage = async (req, res) => {
 
         // SOCKETIO Functionality
 
-        res.status(200).json(newMessage);
+        res.status(201).json(newMessage);
+        console.log("5")
     }
     catch(error){
+        console.log("6")
         console.log('Error in sendMessage controller :',error.message);
         res.status(500).json({error:"Internal server error"});
     }
@@ -43,17 +45,18 @@ const getMessages= async (req, res) => {
         const senderId = req.user._id;
 
         const conversation = await Conversation.findOne(
-            {participants:{$all:[senderId,receiverId]}},
+            {participants:{$all:[senderId,receiverId]},}
         ).populate('messages');
 
         if(!conversation){
-            return res.status(200).json({messages:[]});
+            return res.status(200).json([]);
         }
-
-        res.status(200).json({messages:conversation.messages
-    });
+        const messages = conversation.messages;
+        res.status(200).json(messages);
+    console.log("7")
 }
     catch(error){
+        console.log("8")
         console.log('Error in getMessages controller :',error.message);
         res.status(500).json({error:"Internal server error"});
     }

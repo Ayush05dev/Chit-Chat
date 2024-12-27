@@ -7,21 +7,21 @@ const signup = async (req, res) => {
    try{
     const {fullName,username ,password,confirmPassword,gender} =req.body;
     if(password!==confirmPassword){
-        return res.status(400).json({message:"Password do not match"});
+        return res.status(400).json({error:"Password do not match"});
     }
 
     const user = await User.findOne({username});
     if(user){
-        return res.status(400).json({message:"Username already exists"});
+        return res.status(400).json({error:"Username already exists"});
     }
     // Hash Password here
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
 
-    // https://avatar-placeholder.iran.liara.run
-    const boyProfilePic = `https://avatar-placeholder.iran.liara.run/public/boy?username=${username}`;
+    
+    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
 
-    const girlProfilePic = `https://avatar-placeholder.iran.liara.run/public/girl?username=${username}`;
+    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
     const newUser = await User.create({
         fullName,
@@ -41,7 +41,7 @@ const signup = async (req, res) => {
         profilePic:newUser.profilePic
     });
 } else{
-    res.status(400).json({message:"Invalid user data"});
+    res.status(400).json({error:"Invalid user data"});
 }
 
    }
@@ -57,15 +57,18 @@ const login = async (req, res) => {
         const user = await User.findOne({username});
         const isPasswordCorrect = user && await bcrypt.compare(password,user.password);
         if(!user || !isPasswordCorrect){
-            return res.status(400).json({message:"Invalid username or password"});
+            return res.status(400).json({error:"Invalid username or password"});
         }
         generateTokenAndSetCookie(user._id,res);
+
+        
         res.status(200).json({
             _id:user._id,
             fullName:user.fullName,
             username:user.username,
             profilePic:user.profilePic
         });
+        // console.log("backend login work fine ")
     }
     catch(error){
         console.log('Error is login cotroller :',error.message);
@@ -80,6 +83,7 @@ const logout = async (req, res) => {
        maxAge:0,    
     });
     res.status(200).json({message:"Logout successfully"});
+    // console.log("backend logout work fine ")
    }
    catch(error){
     console.log('Error is logout cotroller :',error.message);
