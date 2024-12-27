@@ -18,15 +18,15 @@ const useSendMessage = () => {
 			});
 			const data = await res.json();
 			if (data.error) throw new Error(data.error);
-			console.log("data is  useSendMessages:",data)
-			console.log("messages is  useSendMessages:",messages)
-			console.log("1")
+			// console.log("data is  useSendMessages:",data)
+			// console.log("messages is  useSendMessages:",messages)
+			// console.log("1")
 			// console.log("messages is after 1 : ",messages)
 			setMessages([...messages, data]);
 			// console.log("messages is after 1 : ",messages)
 
 		} catch (error) {
-			console.log("2")
+			// console.log("2")
 			toast.error(error.message);
 		} finally {
 			setLoading(false);

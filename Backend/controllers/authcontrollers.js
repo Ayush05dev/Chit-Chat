@@ -46,7 +46,7 @@ const signup = async (req, res) => {
 
    }
    catch(error){
-    console.log('Error is signup cotroller :',error.message);
+    // console.log('Error is signup cotroller :',error.message);
     res.status(500).json({error:"Internal server error"});
    }
 }   
@@ -71,7 +71,7 @@ const login = async (req, res) => {
         // console.log("backend login work fine ")
     }
     catch(error){
-        console.log('Error is login cotroller :',error.message);
+        // console.log('Error is login cotroller :',error.message);
         res.status(500).json({error:"Internal server error"});
        }
 }
@@ -86,7 +86,7 @@ const logout = async (req, res) => {
     // console.log("backend logout work fine ")
    }
    catch(error){
-    console.log('Error is logout cotroller :',error.message);
+    // console.log('Error is logout cotroller :',error.message);
     res.status(500).json({error:"Internal server error"});
    }
 }

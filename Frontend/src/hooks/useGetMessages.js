@@ -13,15 +13,15 @@ const useGetMessages = () => {
 				const res = await fetch(`/api/messages/${selectedConversation._id}`);
 				const data = await res.json();
 				if (data.error) throw new Error(data.error);
-				console.log("data is in useGetMessage:",data)
-				console.log("messages is in useGetMessage:",messages)
-                console.log("3")
+				// console.log("data is in useGetMessage:",data)
+				// console.log("messages is in useGetMessage:",messages)
+                // console.log("3")
 				// console.log("data.messages :",data.messages)
 				setMessages(data);
 				// console.log("messages is in useGetMessage after set:",messages)
 			} catch (error) {
-                console.log("I am inside useGetMessages.js file catch" )
-                console.log("4")
+                // console.log("I am inside useGetMessages.js file catch" )
+                // console.log("4")
 				toast.error(error.message);
 			} finally {
 				setLoading(false);
