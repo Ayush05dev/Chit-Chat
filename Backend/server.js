@@ -3,14 +3,13 @@ const dotenv = require('dotenv');
 const connectToMongodb = require('./db/connectToMongodb');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+const {app,server,io} = require('./socket/socket');
 
 
 const authRoutes = require('./routes/authroutes');
 const messageRoutes = require('./routes/messageroutes');
 const userRoutes = require('./routes/userroutes');
 
-const app = express();
 
 dotenv.config();
 // console.log("port " ,process.env.PORT); // Should log the value from the `.env` file
@@ -34,7 +33,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
   });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongodb();
   console.log(`Server is running on port ${PORT}`);
 });

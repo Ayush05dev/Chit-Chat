@@ -1,5 +1,6 @@
 const Conversation = require("../models/conversation");
 const Message = require("../models/message");
+const { getReceiverSocketId, io } = require("../socket/socket");
 
 const sendMessage = async (req, res) => {
     try{
@@ -28,6 +29,12 @@ const sendMessage = async (req, res) => {
         }
 
         // SOCKETIO Functionality
+
+        const receiverSocketId=getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            // io.to(<socket-id>).emit(<event-name>,<data>) is used to sent the event to the specific client
+            io.to(receiverSocketId).emit('newMessage',newMessage);
+        }
 
         res.status(201).json(newMessage);
         console.log("5")
