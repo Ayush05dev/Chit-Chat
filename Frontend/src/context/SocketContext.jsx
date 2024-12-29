@@ -16,7 +16,7 @@ import { useAuthContext } from "./AuthContext";
 
     useEffect(() => {
         if(authUser){
-            const socket =io("http://localhost:9000",{
+            const socket =io("https://chit-chat-s2op.onrender.com",{
                 query:{
                     userId:authUser._id
                 }
