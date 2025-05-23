@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 
@@ -27,7 +27,7 @@ const useGetConversations = () => {
         }
         getConversations();
     },[]);
-    return {conversations, loading}
+    return {loading,conversations }
 }
 
 export default useGetConversations;
