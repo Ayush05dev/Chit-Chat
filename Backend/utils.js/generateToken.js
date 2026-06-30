@@ -6,7 +6,7 @@ const generateTokenAndSetCookie = (userId,res) => {
     });
 
     res.cookie("jwt",token,{
-        httpOnly:true,
+        httpOnly:true, // Prevents JavaScript in the browser from accessing the cookie.
         maxAge: 15*24*60*60*1000,
         sameSite:"strict", // strict means cookie will only be set if the domain in the URL bar is the same as the domain of the cookie.
         secure: process.env.NODE_ENV !== 'development' 
@@ -17,4 +17,12 @@ module.exports = generateTokenAndSetCookie;
 
 /*
 httpOnly:
-When set to true, the cookie cannot be accessed or modified via client-side JavaScript (e.g., document.cookie). or cross site scripting attack*/ 
+When set to true, the cookie cannot be accessed or modified via client-side JavaScript (e.g., document.cookie). or cross site scripting attack
+
+secure:true -> Ensures the cookie is only sent over HTTPS (encrypted).Cookie is never sent over plain HTTP.
+
+
+expiration:
+JWT expires: Token becomes invalid → jwt.verify() will throw error
+cookie epires:Browser stops sending the cookie
+*/ 

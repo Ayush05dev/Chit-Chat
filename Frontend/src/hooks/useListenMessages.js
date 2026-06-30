@@ -22,6 +22,7 @@ const useListenMessages = () => {
 
         // when the component is unmounted this will be called and the socket will be closed
         return () => {  // very necessary to close the socket connection
+            // when your component rerenders, new even listener is added but it is necessary to remove the old one else it will also staty active and will cause duplicate messages, multiple sounds
             socket?.off("newMessage");
         }
     },[socket,messages,setMessages]);

@@ -11,7 +11,9 @@ const Messages = () => {
 	useListenMessages();
 	const lastMessageRef = useRef();
 
-	useEffect(() => {
+	useEffect(() => { // to scroll to last message when we open a person's chat or when we send a message 
+		// timeout needed because when we open a person's chat then messages are not loaded immediately, so if we scroll immediately then it will not scroll to last message
+		// so we need to wait for messages to be loaded before scrolling
 		setTimeout(() => {
 			lastMessageRef.current?.scrollIntoView({ behavior: "smooth" })},100)
 	},[messages]);

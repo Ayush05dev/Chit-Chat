@@ -11,13 +11,14 @@ const sendMessage = async (req, res) => {
        let conversation= await Conversation.findOne(
             {participants:{$all:[senderId,receiverId]}},
         );
-        if(!conversation){
+         
+        if(!conversation){ // if there is no conversation between sender and receiver, create a new conversation
             conversation = await Conversation.create({
                 participants:[senderId,receiverId],
             });
         }
 
-        const newMessage = await Message.create({
+        const newMessage = await Message.create({ // now create a new message
             senderId,
             receiverId,
             message
@@ -53,9 +54,9 @@ const getMessages= async (req, res) => {
 
         const conversation = await Conversation.findOne(
             {participants:{$all:[senderId,receiverId]},}
-        ).populate('messages');
+        ).populate('messages'); // don't just gives the message ids, it gives the full message objects
 
-        if(!conversation){
+        if(!conversation){ // if there is no conversation between sender and receiver before we will return a empty array
             return res.status(200).json([]);
         }
         const messages = conversation.messages;

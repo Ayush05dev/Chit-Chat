@@ -11,7 +11,7 @@ import { useAuthContext } from "./AuthContext";
 
  export const SocketContextProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
-    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [onlineUsers, setOnlineUsers] = useState([]); // for showing active(online) status icon on profile 
     const {authUser} = useAuthContext();
 
     useEffect(() => {

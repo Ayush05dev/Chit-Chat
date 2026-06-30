@@ -21,7 +21,8 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
+app.use(express.json()); // If any incoming request has a Content-Type: application/json, parse the JSON and store the resulting object in req.body
+
 app.use(cookieParser()); // to parse the incoming requests with cookies (from req.cookies)
 
 // Enable CORS for frontend (http://localhost:3000)
@@ -29,7 +30,7 @@ app.use(cookieParser()); // to parse the incoming requests with cookies (from re
 
 
 
-app.use("/api/auth",authRoutes) 
+app.use("/api/auth",authRoutes) // middleware for auth routes
 app.use("/api/messages",messageRoutes) 
 app.use("/api/users",userRoutes)
 

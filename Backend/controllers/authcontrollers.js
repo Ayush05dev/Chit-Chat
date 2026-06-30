@@ -15,7 +15,7 @@ const signup = async (req, res) => {
         return res.status(400).json({error:"Username already exists"});
     }
     // Hash Password here
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(10); // the higher the number(10), the more secure the hash will be, but it will take longer to compute
     const hashedPassword = await bcrypt.hash(password,salt);
 
     
@@ -32,6 +32,7 @@ const signup = async (req, res) => {
         gender,
         profilePic:gender==="Male" ? boyProfilePic : girlProfilePic
     })
+
     if(newUser){
         // Generate JWT token
         generateTokenAndSetCookie(newUser._id,res);

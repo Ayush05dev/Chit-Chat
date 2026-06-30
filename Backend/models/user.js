@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:""
     },
-},{timestamps:true});
+},{timestamps:true}); // this timestamps add fields createdAt and updatedAt automatically
 
 const User=mongoose.model("user",userSchema);
 
